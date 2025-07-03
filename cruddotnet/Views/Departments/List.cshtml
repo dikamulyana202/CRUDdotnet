@@ -1,0 +1,52 @@
+﻿@model List<cruddotnet.Models.Entities.Department>
+
+@{
+    var role = Context.Session.GetString("UserRole");
+}
+
+@if (TempData["Alert"] != null)
+{
+    <div class="alert alert-warning">@TempData["Alert"]</div>
+}
+
+<div class="d-flex justify-content-between mb-3">
+    <h1>Data Departments</h1>
+    <a asp-controller="Departments" asp-action="Create" class="btn btn-primary">+ Departemen</a>
+</div>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Cari nama departemen..." />
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nama Departemen</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.DepartmentId</td>
+                <td>@department.DepartmentName</td>
+                <td>
+                    <a class="btn btn-info" asp-action="Detail" asp-route-departmentId="@department.DepartmentId">Lihat Karyawan</a>
+                    @if (role == "Admin")
+                    {
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-departmentId="@department.DepartmentId">Edit</a>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="DepartmentId" value="@department.DepartmentId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model cruddotnet.Models.Entities.Department
+
+<h2>Daftar Karyawan - @Model.DepartmentName</h2>
+
+@if (Model.Employees != null && Model.Employees.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model.Employees)
+            {
+                <tr>
+                    <td>@emp.EmployeeId</td>
+                    <td>@emp.EmployeeName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Tidak ada karyawan dalam departemen ini.</p>
+}
