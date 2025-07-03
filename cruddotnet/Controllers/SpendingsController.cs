@@ -170,7 +170,7 @@ namespace cruddotnet.Controllers
             using var pdf = new PdfDocument(writer);
             var doc = new Document(pdf);
 
-            doc.Add(new Paragraph("Laporan Spending").SetBold().SetFontSize(16).SetMarginBottom(10));
+            doc.Add(new Paragraph("Laporan Spending").SetFontSize(16).SetMarginBottom(10));
 
             foreach (var s in data)
             {
